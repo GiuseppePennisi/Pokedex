@@ -17,7 +17,8 @@
         "paths": {
             "@pokedex/pokeball-loader-ui": [
                 "libs/pokeball-loader-ui/src/index.ts"
-            ]
+            ],
+            "@pokedex/ui": ["libs/ui/src/index.ts"]
         }
     },
     "exclude": ["node_modules", "tmp"]

@@ -18,6 +18,9 @@
         "inlineStyleLanguage": "scss",
         "assets": ["apps/pokedex/src/favicon.ico", "apps/pokedex/src/assets"],
         "styles": ["apps/pokedex/src/styles.scss"],
+        "stylePreprocessorOptions": {
+            "includePaths": ["libs/ui/src/lib/styles"]
+        },
         "scripts": []
       },
       "configurations": {

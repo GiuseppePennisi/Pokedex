@@ -6,8 +6,10 @@ import { Component } from '@angular/core';
     standalone: true,
     imports: [CommonModule],
     styleUrls: ['./pokeball-loader-ui.components.scss'],
-    template: ` <div class="wrapper">
-        <div class="pokeball"></div>
+    template: ` <div class="loader_background">
+        <div class="pokeball_wrapper">
+            <div class="pokeball"></div>
+        </div>
     </div>`,
 })
 export class PokeballLoaderUiComponent {}
