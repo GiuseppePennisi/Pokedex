@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "prepare": "husky install",
+    "format": "npx prettier \"apps/**/*.{js,jsx,ts,tsx,html,css,scss}\" --write",
     "cm": "cz"
   },
   "private": true,
