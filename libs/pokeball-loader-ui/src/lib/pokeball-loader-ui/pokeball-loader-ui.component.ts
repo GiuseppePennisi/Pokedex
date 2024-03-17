@@ -5,7 +5,9 @@ import { Component } from '@angular/core';
     selector: 'pkmn-pokeball-loader-ui',
     standalone: true,
     imports: [CommonModule],
-    template: `<p>pokeball-loader-ui works!</p>`,
-    styles: ``,
+    styleUrls: ['./pokeball-loader-ui.components.scss'],
+    template: ` <div class="wrapper">
+        <div class="pokeball"></div>
+    </div>`,
 })
 export class PokeballLoaderUiComponent {}
