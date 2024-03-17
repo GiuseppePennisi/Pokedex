@@ -13,6 +13,59 @@
             "allow": [],
             "depConstraints": [
               {
+                "sourceTag": "type:e2e",
+                "onlyDependOnLibsWithTags": ["type:app"]
+              },
+              {
+                "sourceTag": "type:app",
+                "onlyDependOnLibsWithTags": ["type:feature", "type:util"]
+              },
+              {
+                "sourceTag": "type:feature",
+                "onlyDependOnLibsWithTags": [
+                  "type:sub-feature",
+                  "type:data-access",
+                  "type:ui",
+                  "type:util"
+                ]
+              },
+              {
+                "sourceTag": "type:sub-feature",
+                "onlyDependOnLibsWithTags": [
+                  "type:sub-feature",
+                  "type:data-access",
+                  "type:ui",
+                  "type:util"
+                ]
+              },
+              {
+                "sourceTag": "type:ui",
+                "onlyDependOnLibsWithTags": ["type:ui", "type:util"]
+              },
+              {
+                "sourceTag": "type:data-access",
+                "onlyDependOnLibsWithTags": ["type:util", "type:data-access"]
+              },
+              {
+                  "sourceTag": "platform:angular",
+                  "onlyDependOnLibsWithTags": [
+                      "platform:angular",
+                      "platform:web-component",
+                      "platform:any"
+                  ]
+              },
+              {
+                "sourceTag": "platform:any",
+                "onlyDependOnLibsWithTags": ["platform:any"]
+              },
+              {
+                "sourceTag": "platform:web-component",
+                "onlyDependOnLibsWithTags": [
+                  "platform:web-component",
+                  "platform:any"
+                ]
+              },
+              {
                 "sourceTag": "*",
                 "onlyDependOnLibsWithTags": ["*"]
               }
