@@ -11,5 +11,4 @@ import { PokeballLoaderUiComponent } from '@pokedex/pokeball-loader-ui';
 })
 export class AppComponent {
     title = 'pokedex';
-    //https://codepen.io/vinztt/pen/XjEyvZ
 }
