@@ -36,11 +36,11 @@ module.exports = {
   ],
 
   scopes: [
+    { name: 'feature' },
+    { name: 'data-access' },
     { name: 'ui' },
-    { name: 'android' },
-    { name: 'ios' },
-    { name: 'home' },
-    { name: 'planner' },
+    { name: 'sub-feauture' },
+    { name: 'util' },
     { name: 'settings' },
   ],
 
