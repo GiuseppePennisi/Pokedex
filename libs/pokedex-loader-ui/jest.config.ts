@@ -1,9 +1,9 @@
 /* eslint-disable */
 export default {
-    displayName: 'pokeball-loader-ui',
+    displayName: 'pokedex-loader-ui',
     preset: '../../jest.preset.js',
     setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-    coverageDirectory: '../../coverage/libs/pokeball-loader-ui',
+    coverageDirectory: '../../coverage/libs/pokedex-loader-ui',
     transform: {
         '^.+\\.(ts|mjs|js|html)$': [
             'jest-preset-angular',

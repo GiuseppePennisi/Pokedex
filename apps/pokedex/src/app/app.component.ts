@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { PokeballLoaderUiComponent } from '@pokedex/pokeball-loader-ui';
+import { PokedexLoaderUiComponent } from '@pokedex/pokeball-loader-ui';
 
 @Component({
     standalone: true,
-    imports: [PokeballLoaderUiComponent, RouterModule],
+    imports: [PokedexLoaderUiComponent, RouterModule],
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',

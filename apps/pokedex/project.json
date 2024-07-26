@@ -21,7 +21,7 @@
                     "apps/pokedex/src/assets",
                     {
                         "glob": "*",
-                        "input": "libs/pokeball-loader-ui/src/lib/assets",
+                        "input": "libs/pokedex-loader-ui/src/lib/assets",
                         "output": "assets/"
                     }
                 ],

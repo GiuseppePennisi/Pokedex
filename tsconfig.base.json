@@ -16,7 +16,7 @@
         "baseUrl": ".",
         "paths": {
             "@pokedex/pokeball-loader-ui": [
-                "libs/pokeball-loader-ui/src/index.ts"
+                "libs/pokedex-loader-ui/src/index.ts"
             ],
             "@pokedex/pokedex-entries-data-access": [
                 "libs/pokedex-list-data-access/src/index.ts"
