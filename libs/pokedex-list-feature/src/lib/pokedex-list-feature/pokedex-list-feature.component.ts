@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { PokemonListFacade } from '@pokedex/pokedex-list-data-access';
 
 @Component({
     selector: 'pkmn-pokedex-list-feature',
@@ -8,4 +9,10 @@ import { Component } from '@angular/core';
     templateUrl: './pokedex-list-feature.component.html',
     styleUrl: './pokedex-list-feature.component.css',
 })
-export class PokedexListFeatureComponent {}
+export class PokedexListFeatureComponent implements OnInit {
+    private pokedexListFacade = inject(PokemonListFacade);
+
+    ngOnInit(): void {
+        this.pokedexListFacade.getPokedexPage();
+    }
+}

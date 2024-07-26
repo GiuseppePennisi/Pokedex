@@ -1,7 +1,7 @@
 export interface PokedexPage {
     count: number;
     next: string;
-    previous: null;
+    previous: string;
     results: Result[];
 }
 
