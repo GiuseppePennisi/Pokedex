@@ -19,7 +19,7 @@
                 "libs/pokeball-loader-ui/src/index.ts"
             ],
             "@pokedex/pokedex-entries-data-access": [
-                "libs/pokedex-entries-data-access/src/index.ts"
+                "libs/pokedex-list-data-access/src/index.ts"
             ],
             "@pokedex/pokedex-list-feature": [
                 "libs/pokedex-list-feature/src/index.ts"

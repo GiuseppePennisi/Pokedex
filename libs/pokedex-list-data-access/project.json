@@ -1,7 +1,7 @@
 {
     "name": "pokedex-entries-data-access",
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "libs/pokedex-entries-data-access/src",
+    "sourceRoot": "libs/pokedex-list-data-access/src",
     "prefix": "pkmn",
     "tags": ["data-access"],
     "projectType": "library",
@@ -10,7 +10,7 @@
             "executor": "@nx/jest:jest",
             "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
             "options": {
-                "jestConfig": "libs/pokedex-entries-data-access/jest.config.ts"
+                "jestConfig": "libs/pokedex-list-data-access/jest.config.ts"
             }
         },
         "lint": {
