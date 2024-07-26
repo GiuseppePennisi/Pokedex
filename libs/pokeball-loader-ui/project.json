@@ -2,7 +2,7 @@
     "name": "pokeball-loader-ui",
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/pokeball-loader-ui/src",
-    "prefix": "pk",
+    "prefix": "pkmn",
     "tags": [],
     "projectType": "library",
     "targets": {

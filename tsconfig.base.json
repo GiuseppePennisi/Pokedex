@@ -21,6 +21,9 @@
             "@pokedex/pokedex-entries-data-access": [
                 "libs/pokedex-entries-data-access/src/index.ts"
             ],
+            "@pokedex/pokedex-list-feature": [
+                "libs/pokedex-list-feature/src/index.ts"
+            ],
             "@pokedex/ui": ["libs/ui/src/index.ts"]
         }
     },
