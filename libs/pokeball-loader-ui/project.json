@@ -6,6 +6,18 @@
     "tags": [],
     "projectType": "library",
     "targets": {
+        "build": {
+            "executor": "@nx/angular:package",
+            "options": {
+                "assets": [
+                    {
+                        "glob": "**/*",
+                        "input": "libs/pokeball-loader-ui/src/lib/assets",
+                        "output": "assets"
+                    }
+                ]
+            }
+        },
         "test": {
             "executor": "@nx/jest:jest",
             "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],

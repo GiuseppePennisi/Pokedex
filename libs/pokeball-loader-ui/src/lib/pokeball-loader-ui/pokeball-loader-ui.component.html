@@ -1,8 +1,8 @@
-<div class="loader_background">
-    <div class="pokeball_wrapper">
-        <div class="pokeball">
-            <div class="pokeball__top"></div>
-            <div class="pokeball__down flex items-center justify-center"></div>
-        </div>
-    </div>
+<!DOCTYPE html>
+<div class="align-items-center flex-column d-flex justify-content-center loader-background" id="pokeball-container"
+  [ngClass]="{
+    'fade-in': isLoading(),
+    'fade-out':!isLoading()
+  }">
+  <img id="pokeball-img" class="pokeball" src="assets/pokeball.png" />
 </div>
