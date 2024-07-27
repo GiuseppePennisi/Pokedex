@@ -1,6 +1,7 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, FunctionalEffect, ofType } from '@ngrx/effects';
-import { catchError, exhaustMap, map, of } from 'rxjs';
+import { PokedexLoaderFacade } from '@pokedex/pokedex-loader-data-access';
+import { catchError, exhaustMap, map, of, tap } from 'rxjs';
 
 import { PokeApiRestService } from '../services';
 import * as PokemonListActions from './pokedex-list.actions';
@@ -33,6 +34,34 @@ export const getPokedexPage$ = createEffect(
     { functional: true }
 );
 
+export const setLoaderWithGetPokedexPage$ = createEffect(
+    (
+        actions$ = inject(Actions),
+        pokedexLoaderFacade = inject(PokedexLoaderFacade)
+    ) => {
+        return actions$.pipe(
+            ofType(PokemonListActions.getPokedexPage),
+            tap(() => pokedexLoaderFacade.setPokedexLoaderState(true))
+        );
+    },
+    { functional: true, dispatch: false }
+);
+
+export const setLoaderWithSetPokedexPage$ = createEffect(
+    (
+        actions$ = inject(Actions),
+        pokedexLoaderFacade = inject(PokedexLoaderFacade)
+    ) => {
+        return actions$.pipe(
+            ofType(PokemonListActions.setPokedexPage),
+            tap(() => pokedexLoaderFacade.setPokedexLoaderState(false))
+        );
+    },
+    { functional: true, dispatch: false }
+);
+
 export const pokedexListEffects: Record<string, FunctionalEffect> = {
     getPokedexPage$,
+    setLoaderWithGetPokedexPage$,
+    setLoaderWithSetPokedexPage$,
 };
