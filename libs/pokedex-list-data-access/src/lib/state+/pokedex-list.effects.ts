@@ -1,6 +1,7 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, FunctionalEffect, ofType } from '@ngrx/effects';
 import { catchError, exhaustMap, map, of } from 'rxjs';
+
 import { PokeApiRestService } from '../services';
 import * as PokemonListActions from './pokedex-list.actions';
 

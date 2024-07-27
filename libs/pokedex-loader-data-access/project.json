@@ -1,0 +1,20 @@
+{
+    "name": "pokedex-loader-data-access",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "libs/pokedex-loader-data-access/src",
+    "prefix": "pkmn",
+    "projectType": "library",
+    "tags": ["data-access"],
+    "targets": {
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "libs/pokedex-loader-data-access/jest.config.ts"
+            }
+        },
+        "lint": {
+            "executor": "@nx/eslint:lint"
+        }
+    }
+}
