@@ -4,7 +4,7 @@ import { PokedexLoaderUiComponent } from '@pokedex/pokeball-loader-ui';
 
 @Component({
     standalone: true,
-    imports: [PokedexLoaderUiComponent, RouterModule],
+    imports: [RouterModule, PokedexLoaderUiComponent],
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',

@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<div
-    class="align-items-center flex-column d-flex justify-content-center loader-background position-absolute"
-    id="pokeball-container"
-    [ngClass]="{
+<div class="align-items-center flex-column d-flex justify-content-center loader-background position-absolute"
+  id="pokeball-container" [ngClass]="{
         'fade-in': isLoading(),
         'fade-out': !isLoading()
-    }"
->
-    <img id="pokeball-img" class="pokeball" src="assets/pokeball.png" />
+    }">
+  <img id="pokeball-img" class="pokeball" src="assets/pokeball.png" />
 </div>

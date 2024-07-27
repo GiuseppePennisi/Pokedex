@@ -18,6 +18,7 @@ export const getPokedexPage$ = createEffect(
                             pokedexPage,
                         })
                     ),
+                    //TODO handle error here with appropriate error handling action
                     catchError((error) =>
                         of({
                             type: '[PokedexList] Error fetching pokedex page',
