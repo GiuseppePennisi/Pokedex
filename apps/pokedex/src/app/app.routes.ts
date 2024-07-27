@@ -1,5 +1,6 @@
 import { Route } from '@angular/router';
 import { provideEffects } from '@ngrx/effects';
+
 import { provideState } from '@ngrx/store';
 import {
     POKEDEX_PAGE_STORE_KEY,
