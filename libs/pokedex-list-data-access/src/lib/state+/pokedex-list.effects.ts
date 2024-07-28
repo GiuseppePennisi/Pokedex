@@ -1,9 +1,10 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, FunctionalEffect, ofType } from '@ngrx/effects';
 import { PokedexLoaderFacade } from '@pokedex/pokedex-loader-data-access';
-import { catchError, exhaustMap, map, of, tap } from 'rxjs';
+import { exhaustMap, forkJoin, map, tap } from 'rxjs';
+import { PokeApiRestService } from './../services/pokeapi-rest-service';
 
-import { PokeApiRestService } from '../services';
+import { catchOperatorError } from '@pokedex/pokedex-utils';
 import * as PokemonListActions from './pokedex-list.actions';
 
 export const getPokedexPage$ = createEffect(
@@ -20,12 +21,65 @@ export const getPokedexPage$ = createEffect(
                             pokedexPage,
                         })
                     ),
-                    //TODO handle error here with appropriate error handling action
-                    catchError((error) =>
-                        of({
-                            type: '[PokedexList] Error fetching pokedex page',
-                            error,
+                    catchOperatorError((error) =>
+                        PokemonListActions.setPokedexError()
+                    )
+                )
+            )
+        );
+    },
+    { functional: true }
+);
+
+export const getPokemonSpeciesAfterSetPokedexPage$ = createEffect(
+    (
+        actions$ = inject(Actions),
+        pokeApiRestService = inject(PokeApiRestService)
+    ) => {
+        return actions$.pipe(
+            ofType(PokemonListActions.setPokedexPage),
+            map((payload) =>
+                payload.pokedexPage.results
+                    .map((result) => {
+                        const parts = result.url.split('/').filter(Boolean);
+                        return Number(parts[parts.length - 1]);
+                    })
+                    .filter((id) => !isNaN(id))
+            ),
+            exhaustMap((pokemonIds) =>
+                forkJoin(
+                    pokemonIds.map((id) =>
+                        pokeApiRestService.getPokemonSpecies(id)
+                    )
+                ).pipe(
+                    map((pokemonSpecies) =>
+                        PokemonListActions.setMultiplePokemonSpecies({
+                            pokemonSpecies,
                         })
+                    )
+                )
+            )
+        );
+    },
+    { functional: true }
+);
+
+export const getPokemonSpecies$ = createEffect(
+    (
+        actions$ = inject(Actions),
+        pokeApiRestService = inject(PokeApiRestService)
+    ) => {
+        return actions$.pipe(
+            ofType(PokemonListActions.getPokemonSpecies),
+            exhaustMap(({ id }) =>
+                pokeApiRestService.getPokemonSpecies(id).pipe(
+                    map((pokemonSpecies) =>
+                        PokemonListActions.setPokemonSpecies({
+                            pokemonSpecies,
+                        })
+                    ),
+                    catchOperatorError((error) =>
+                        PokemonListActions.setPokedexError()
                     )
                 )
             )
@@ -62,6 +116,8 @@ export const setLoaderWithSetPokedexPage$ = createEffect(
 
 export const pokedexListEffects: Record<string, FunctionalEffect> = {
     getPokedexPage$,
+    getPokemonSpecies$,
     setLoaderWithGetPokedexPage$,
     setLoaderWithSetPokedexPage$,
+    getPokemonSpeciesAfterSetPokedexPage$,
 };
