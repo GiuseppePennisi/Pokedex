@@ -3,8 +3,8 @@
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/pokedex-list-data-access/src",
     "prefix": "pkmn",
-    "tags": ["data-access"],
     "projectType": "library",
+    "tags": ["data-access"],
     "targets": {
         "test": {
             "executor": "@nx/jest:jest",

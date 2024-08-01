@@ -4,7 +4,7 @@
     "projectType": "application",
     "prefix": "app",
     "sourceRoot": "apps/pokedex/src",
-    "tags": [],
+    "tags": ["app"],
     "targets": {
         "build": {
             "executor": "@angular-devkit/build-angular:application",
@@ -13,7 +13,7 @@
                 "outputPath": "dist/apps/pokedex",
                 "index": "apps/pokedex/src/index.html",
                 "browser": "apps/pokedex/src/main.ts",
-                "polyfills": ["zone.js"],
+                "polyfills": ["zone.js", "@angular/localize/init"],
                 "tsConfig": "apps/pokedex/tsconfig.app.json",
                 "inlineStyleLanguage": "scss",
                 "assets": [

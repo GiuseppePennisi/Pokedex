@@ -1,16 +1,16 @@
 {
-    "name": "pokedex-list-feature",
+    "name": "pokedex-utils",
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "libs/pokedex-list-feature/src",
+    "sourceRoot": "libs/pokedex-utils/src",
     "prefix": "pkmn",
     "projectType": "library",
-    "tags": ["feature"],
+    "tags": ["util"],
     "targets": {
         "test": {
             "executor": "@nx/jest:jest",
             "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
             "options": {
-                "jestConfig": "libs/pokedex-list-feature/jest.config.ts"
+                "jestConfig": "libs/pokedex-utils/jest.config.ts"
             }
         },
         "lint": {

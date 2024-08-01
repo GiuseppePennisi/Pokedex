@@ -2,15 +2,22 @@ import { provideHttpClient } from '@angular/common/http';
 import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideEffects } from '@ngrx/effects';
+
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 
+import {
+    POKEDEX_LOADER_STORE_KEY,
+    pokedexLoaderReducer,
+} from '@pokedex/pokedex-loader-data-access';
 import { appRoutes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
     providers: [
         provideEffects(),
-        provideStore(),
+        provideStore({
+            [POKEDEX_LOADER_STORE_KEY]: pokedexLoaderReducer,
+        }),
         provideStoreDevtools({
             maxAge: 25, // Retains last 25 states
             logOnly: false, // Restrict extension to log-only mode

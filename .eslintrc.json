@@ -1,95 +1,143 @@
 {
-  "root": true,
-  "ignorePatterns": ["**/*"],
-  "plugins": ["@nx"],
-  "overrides": [
-    {
-      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
-      "rules": {
-        "@nx/enforce-module-boundaries": [
-          "error",
-          {
-            "enforceBuildableLibDependency": true,
-            "allow": [],
-            "depConstraints": [
-              {
-                "sourceTag": "type:e2e",
-                "onlyDependOnLibsWithTags": ["type:app"]
-              },
-              {
-                "sourceTag": "type:app",
-                "onlyDependOnLibsWithTags": ["type:feature", "type:util"]
-              },
-              {
-                "sourceTag": "type:feature",
-                "onlyDependOnLibsWithTags": [
-                  "type:sub-feature",
-                  "type:data-access",
-                  "type:ui",
-                  "type:util"
+    "root": true,
+    "ignorePatterns": ["**/*"],
+    "plugins": ["@nx", "@ngrx"],
+    "overrides": [
+        {
+            "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+            "rules": {
+                "@nx/enforce-module-boundaries": [
+                    "error",
+                    {
+                        "enforceBuildableLibDependency": true,
+                        "allow": [],
+                        "depConstraints": [
+                            {
+                                "sourceTag": "type:e2e",
+                                "onlyDependOnLibsWithTags": ["type:app"]
+                            },
+                            {
+                                "sourceTag": "type:app",
+                                "onlyDependOnLibsWithTags": [
+                                    "type:feature",
+                                    "type:util"
+                                ]
+                            },
+                            {
+                                "sourceTag": "type:feature",
+                                "onlyDependOnLibsWithTags": [
+                                    "type:sub-feature",
+                                    "type:data-access",
+                                    "type:ui",
+                                    "type:util"
+                                ]
+                            },
+                            {
+                                "sourceTag": "type:sub-feature",
+                                "onlyDependOnLibsWithTags": [
+                                    "type:sub-feature",
+                                    "type:data-access",
+                                    "type:ui",
+                                    "type:util"
+                                ]
+                            },
+                            {
+                                "sourceTag": "type:ui",
+                                "onlyDependOnLibsWithTags": [
+                                    "type:ui",
+                                    "type:util"
+                                ]
+                            },
+                            {
+                                "sourceTag": "type:data-access",
+                                "onlyDependOnLibsWithTags": [
+                                    "type:util",
+                                    "type:data-access"
+                                ]
+                            },
+                            {
+                                "sourceTag": "platform:angular",
+                                "onlyDependOnLibsWithTags": [
+                                    "platform:angular",
+                                    "platform:web-component",
+                                    "platform:any"
+                                ]
+                            },
+                            {
+                                "sourceTag": "platform:any",
+                                "onlyDependOnLibsWithTags": ["platform:any"]
+                            },
+                            {
+                                "sourceTag": "platform:web-component",
+                                "onlyDependOnLibsWithTags": [
+                                    "platform:web-component",
+                                    "platform:any"
+                                ]
+                            },
+                            {
+                                "sourceTag": "*",
+                                "onlyDependOnLibsWithTags": ["*"]
+                            }
+                        ]
+                    }
                 ]
-              },
-              {
-                "sourceTag": "type:sub-feature",
-                "onlyDependOnLibsWithTags": [
-                  "type:sub-feature",
-                  "type:data-access",
-                  "type:ui",
-                  "type:util"
-                ]
-              },
-              {
-                "sourceTag": "type:ui",
-                "onlyDependOnLibsWithTags": ["type:ui", "type:util"]
-              },
-              {
-                "sourceTag": "type:data-access",
-                "onlyDependOnLibsWithTags": ["type:util", "type:data-access"]
-              },
-              {
-                  "sourceTag": "platform:angular",
-                  "onlyDependOnLibsWithTags": [
-                      "platform:angular",
-                      "platform:web-component",
-                      "platform:any"
-                  ]
-              },
-              {
-                "sourceTag": "platform:any",
-                "onlyDependOnLibsWithTags": ["platform:any"]
-              },
-              {
-                "sourceTag": "platform:web-component",
-                "onlyDependOnLibsWithTags": [
-                  "platform:web-component",
-                  "platform:any"
-                ]
-              },
-              {
-                "sourceTag": "*",
-                "onlyDependOnLibsWithTags": ["*"]
-              }
-            ]
-          }
-        ]
-      }
-    },
-    {
-      "files": ["*.ts", "*.tsx"],
-      "extends": ["plugin:@nx/typescript"],
-      "rules": {}
-    },
-    {
-      "files": ["*.js", "*.jsx"],
-      "extends": ["plugin:@nx/javascript"],
-      "rules": {}
-    },
-    {
-      "files": ["*.spec.ts", "*.spec.tsx", "*.spec.js", "*.spec.jsx"],
-      "env": {
-        "jest": true
-      },
-      "rules": {}
-    }
-  ]
+            }
+        },
+        {
+            "files": ["*.ts", "*.tsx"],
+            "extends": ["plugin:@nx/typescript"],
+            "rules": {
+                "@typescript-eslint/no-extra-semi": "error",
+                "no-extra-semi": "off"
+            }
+        },
+        {
+            "files": ["*.js", "*.jsx"],
+            "extends": ["plugin:@nx/javascript"],
+            "rules": {
+                "@typescript-eslint/no-extra-semi": "error",
+                "no-extra-semi": "off"
+            }
+        },
+        {
+            "files": ["*.spec.ts", "*.spec.tsx", "*.spec.js", "*.spec.jsx"],
+            "env": {
+                "jest": true
+            },
+            "rules": {}
+        },
+        {
+            "files": ["*.ts", "*.tsx"],
+            "rules": {
+                "@ngrx/good-action-hygiene": "error",
+                "@ngrx/avoid-cyclic-effects": "error",
+                "@ngrx/no-dispatch-in-effects": "error",
+                "@ngrx/no-effects-in-providers": "error",
+                "@ngrx/no-multiple-actions-in-effects": "error",
+                "@ngrx/prefer-action-creator-in-of-type": "error",
+                "@ngrx/prefer-effect-callback-in-block-statement": "error",
+                "@ngrx/use-effects-lifecycle-interface": "error",
+                "@ngrx/prefer-concat-latest-from": "error",
+                "@ngrx/signal-state-no-arrays-at-root-level": "error",
+                "@ngrx/with-state-no-arrays-at-root-level": "error",
+                "@ngrx/avoid-combining-selectors": "error",
+                "@ngrx/avoid-dispatching-multiple-actions-sequentially": "error",
+                "@ngrx/avoid-duplicate-actions-in-reducer": "error",
+                "@ngrx/avoid-mapping-selectors": "error",
+                "@ngrx/no-multiple-global-stores": "error",
+                "@ngrx/no-reducer-in-key-names": "error",
+                "@ngrx/no-store-subscription": "error",
+                "@ngrx/no-typed-global-store": "error",
+                "@ngrx/on-function-explicit-return-type": "error",
+                "@ngrx/prefer-action-creator-in-dispatch": "error",
+                "@ngrx/prefer-action-creator": "error",
+                "@ngrx/prefer-inline-action-props": "error",
+                "@ngrx/prefer-one-generic-in-create-for-feature-selector": "error",
+                "@ngrx/prefer-selector-in-select": "error",
+                "@ngrx/prefix-selectors-with-select": "error",
+                "@ngrx/select-style": "error",
+                "@ngrx/use-consistent-global-store-name": "error"
+            }
+        }
+    ]
 }

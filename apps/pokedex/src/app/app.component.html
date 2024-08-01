@@ -1,2 +1,2 @@
-<pkmn-pokedex-loader-ui [isLoading]="true"></pkmn-pokedex-loader-ui>
+<pkmn-pokedex-loader-ui [isLoading]="!!(pokedexLoaderFacade.isLoading$ | async)"></pkmn-pokedex-loader-ui>
 <router-outlet></router-outlet>
