@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PokedexPage, PokemonSpecies } from '../models';
+import { PokemonDetailedInfo } from '../models/pokemon-detailed-info.model';
 @Injectable({
     providedIn: 'root',
 })
@@ -33,6 +34,12 @@ export class PokeApiRestService {
     getPokemonSpecies(id: number): Observable<PokemonSpecies> {
         return this.httpClient.get<PokemonSpecies>(
             `${this.baseUrl}/pokemon-species/${id}`
+        );
+    }
+
+    getPokemonDetailedInfo(id: number): Observable<PokemonDetailedInfo> {
+        return this.httpClient.get<PokemonDetailedInfo>(
+            `${this.baseUrl}/pokemon/${id}`
         );
     }
 }

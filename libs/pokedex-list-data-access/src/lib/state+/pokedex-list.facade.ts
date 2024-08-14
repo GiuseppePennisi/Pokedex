@@ -1,12 +1,16 @@
 import { inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as PokedexListActions from './pokedex-list.actions';
+import { selectPokemonListCardViewModelById } from './pokedex-list.selectors';
 
 @Injectable({
     providedIn: 'root',
 })
 export class PokemonListFacade {
     private store = inject(Store);
+
+    public selectPokemonListCardViewModelById$ = (id: number) =>
+        this.store.select(selectPokemonListCardViewModelById(id));
 
     /**
      * This function dispatches an action to fetch a page of Pokédex data from the store.

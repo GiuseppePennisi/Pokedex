@@ -1,19 +1,19 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
-import { PokedexPage, PokemonSpecies } from '../models';
+import { PokedexPage } from '../models';
+import { Pokemon } from '../models/pokemon.model';
 import * as PokedexListActions from './pokedex-list.actions';
 
-// Reminder: selectId is not implemented because PokemonSpecies has id property. https://ngrx.io/guide/entity/adapter
+// Reminder: selectId is not implemented because Pokemon has id property. https://ngrx.io/guide/entity/adapter
 
 export const POKEDEX_PAGE_STORE_KEY = 'pokedexListPage';
 // Keep track of already fetched results to avoid duplicates
 const existingResultsSet = new Set<string>();
 
-export const adapter: EntityAdapter<PokemonSpecies> =
-    createEntityAdapter<PokemonSpecies>({
-        sortComparer: sortById,
-    });
-export interface PokedexListState extends EntityState<PokemonSpecies> {
+export const adapter: EntityAdapter<Pokemon> = createEntityAdapter<Pokemon>({
+    sortComparer: sortById,
+});
+export interface PokedexListState extends EntityState<Pokemon> {
     pokedexPage?: PokedexPage;
 }
 
@@ -47,23 +47,20 @@ export const pokedexListPageReducer = createReducer(
             },
         };
     }),
-    on(
-        PokedexListActions.setMultiplePokemonSpecies,
-        (state, { pokemonSpecies }) => {
-            return adapter.upsertMany(pokemonSpecies, state);
-        }
-    )
+    on(PokedexListActions.setMultiplePokemon, (state, { pokemons }) => {
+        return adapter.upsertMany(pokemons, state);
+    })
 );
 
 /**
- * A function to sort an array of PokemonSpecies objects by their id property in ascending order.
+ * A function to sort an array of Pokemon objects by their id property in ascending order.
  *
- * @param a - The first PokemonSpecies object to compare.
- * @param b - The second PokemonSpecies object to compare.
+ * @param a - The first Pokemon object to compare.
+ * @param b - The second Pokemon object to compare.
  *
  * @returns A negative number if `a.id` is less than `b.id`, a positive number if `a.id` is greater than `b.id`,
  *          or 0 if `a.id` and `b.id` are equal.
  */
-export function sortById(a: PokemonSpecies, b: PokemonSpecies): number {
+export function sortById(a: Pokemon, b: Pokemon): number {
     return a.id - b.id;
 }

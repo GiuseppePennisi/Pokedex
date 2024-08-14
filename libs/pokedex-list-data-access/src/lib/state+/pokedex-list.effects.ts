@@ -1,10 +1,13 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, FunctionalEffect, ofType } from '@ngrx/effects';
 import { PokedexLoaderFacade } from '@pokedex/pokedex-loader-data-access';
-import { exhaustMap, forkJoin, map, tap } from 'rxjs';
+import { exhaustMap, forkJoin, map, switchMap, tap } from 'rxjs';
 import { PokeApiRestService } from './../services/pokeapi-rest-service';
 
 import { catchOperatorError } from '@pokedex/pokedex-utils';
+import { PokemonSpecies } from '../models';
+import { PokemonDetailedInfo } from '../models/pokemon-detailed-info.model';
+import { Pokemon } from '../models/pokemon.model';
 import * as PokemonListActions from './pokedex-list.actions';
 
 export const getPokedexPage$ = createEffect(
@@ -31,7 +34,7 @@ export const getPokedexPage$ = createEffect(
     { functional: true }
 );
 
-export const getPokemonSpeciesAfterSetPokedexPage$ = createEffect(
+export const getPokemonAfterSetPokedexPage$ = createEffect(
     (
         actions$ = inject(Actions),
         pokeApiRestService = inject(PokeApiRestService)
@@ -49,13 +52,16 @@ export const getPokemonSpeciesAfterSetPokedexPage$ = createEffect(
             exhaustMap((pokemonIds) =>
                 forkJoin(
                     pokemonIds.map((id) =>
-                        pokeApiRestService.getPokemonSpecies(id)
+                        fetchAndCombinePokemonData(id, pokeApiRestService)
                     )
                 ).pipe(
-                    map((pokemonSpecies) =>
-                        PokemonListActions.setMultiplePokemonSpecies({
-                            pokemonSpecies,
+                    map((pokemons) =>
+                        PokemonListActions.setMultiplePokemon({
+                            pokemons,
                         })
+                    ),
+                    catchOperatorError((error) =>
+                        PokemonListActions.setPokedexError()
                     )
                 )
             )
@@ -64,18 +70,18 @@ export const getPokemonSpeciesAfterSetPokedexPage$ = createEffect(
     { functional: true }
 );
 
-export const getPokemonSpecies$ = createEffect(
+export const getPokemon$ = createEffect(
     (
         actions$ = inject(Actions),
         pokeApiRestService = inject(PokeApiRestService)
     ) => {
         return actions$.pipe(
-            ofType(PokemonListActions.getPokemonSpecies),
+            ofType(PokemonListActions.getPokemon),
             exhaustMap(({ id }) =>
-                pokeApiRestService.getPokemonSpecies(id).pipe(
-                    map((pokemonSpecies) =>
-                        PokemonListActions.setPokemonSpecies({
-                            pokemonSpecies,
+                fetchAndCombinePokemonData(id, pokeApiRestService).pipe(
+                    map((pokemon) =>
+                        PokemonListActions.setPokemon({
+                            pokemon,
                         })
                     ),
                     catchOperatorError((error) =>
@@ -116,8 +122,27 @@ export const setLoaderWithSetPokedexPage$ = createEffect(
 
 export const pokedexListEffects: Record<string, FunctionalEffect> = {
     getPokedexPage$,
-    getPokemonSpecies$,
+    getPokemon$,
     setLoaderWithGetPokedexPage$,
     setLoaderWithSetPokedexPage$,
-    getPokemonSpeciesAfterSetPokedexPage$,
+    getPokemonAfterSetPokedexPage$,
 };
+
+// Funzione per combinare PokemonDetailedInfo e PokemonSpecies
+function fetchAndCombinePokemonData(
+    id: number,
+    pokeApiRestService: PokeApiRestService
+) {
+    return pokeApiRestService.getPokemonSpecies(id).pipe(
+        switchMap((pokemonSpecies: PokemonSpecies) =>
+            pokeApiRestService.getPokemonDetailedInfo(id).pipe(
+                map<PokemonDetailedInfo, Pokemon>(
+                    (pokemonDetailedInfo: PokemonDetailedInfo) => ({
+                        ...pokemonDetailedInfo,
+                        ...pokemonSpecies,
+                    })
+                )
+            )
+        )
+    );
+}

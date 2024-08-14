@@ -1,3 +1,5 @@
+import { PropertyInfoLink } from './pokemon-property-info-link';
+
 export interface PokemonSpecies {
     base_happiness: number;
     capture_rate: number;
@@ -62,11 +64,6 @@ export interface PalParkEncounter {
 export interface PokedexNumber {
     entry_number: number;
     pokedex: PropertyInfoLink;
-}
-
-export interface PropertyInfoLink {
-    name: string;
-    url: string;
 }
 
 export interface Variety {

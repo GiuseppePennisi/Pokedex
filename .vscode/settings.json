@@ -18,12 +18,15 @@
         "editor.formatOnSave": true
     },
     "cSpell.words": [
+        "heartgold",
         "ngrx",
         "pkmn",
         "pokeapi",
         "Pokeball",
         "pokedex",
         "Pokédex",
-        "popperjs"
+        "popperjs",
+        "soulsilver",
+        "viewmodel"
     ]
     }

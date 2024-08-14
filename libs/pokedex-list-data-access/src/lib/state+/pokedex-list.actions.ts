@@ -1,5 +1,6 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { PokedexPage, PokemonSpecies } from '../models';
+import { PokedexPage } from '../models';
+import { Pokemon } from '../models/pokemon.model';
 
 const actionKey = 'Pokedex List';
 
@@ -8,10 +9,10 @@ export const PokedexListPageActions = createActionGroup({
     events: {
         'get Pokedex Page': props<{ limit?: number; offset?: number }>(),
         'set Pokedex Page': props<{ pokedexPage: PokedexPage }>(),
-        'get Pokemon Species': props<{ id: number }>(),
-        'set Pokemon Species': props<{ pokemonSpecies: PokemonSpecies }>(),
-        'set Multiple Pokemon Species': props<{
-            pokemonSpecies: PokemonSpecies[];
+        'get Pokemon': props<{ id: number }>(),
+        'set Pokemon': props<{ pokemon: Pokemon }>(),
+        'set Multiple Pokemon': props<{
+            pokemons: Pokemon[];
         }>(),
         'set Pokedex Error': emptyProps(),
     },
@@ -20,8 +21,8 @@ export const PokedexListPageActions = createActionGroup({
 export const {
     getPokedexPage,
     setPokedexPage,
-    getPokemonSpecies,
-    setPokemonSpecies,
-    setMultiplePokemonSpecies,
+    getPokemon,
+    setPokemon,
+    setMultiplePokemon,
     setPokedexError,
 } = PokedexListPageActions;

@@ -8,8 +8,6 @@ export const selectLoaderState = createFeatureSelector<PokedexLoaderState>(
     POKEDEX_LOADER_STORE_KEY
 );
 
-/* export const selectLoaderState = (state) => state.pokedexLoader; */
-
 export const selectIsLoading = createSelector(
     selectLoaderState,
     (state: PokedexLoaderState) => state.isLoading
