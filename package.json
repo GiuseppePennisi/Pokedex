@@ -64,7 +64,7 @@
         "autoprefixer": "^10.4.19",
         "commitizen": "^4.3.0",
         "commitlint-config-gitmoji": "^2.3.1",
-        "cypress": "13.13.1",
+        "cypress": "13.14.2",
         "cz-customizable": "^7.2.1",
         "eslint": "8.57.0",
         "eslint-config-prettier": "^9.0.0",
